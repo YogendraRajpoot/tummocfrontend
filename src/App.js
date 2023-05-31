@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { useSelector } from "react-redux";
+import Login from "./components/Login";
+import GoogleOAuth from "./components/GoogleOAuth";
+import "./App.css";
 
-function App() {
+const App = () => {
+  const user = useSelector((state) => state.user);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>User Authentication App</h1>
+      {user ? (
+        <div>
+          <h2>Welcome, {user.name}!</h2>
+          <button>Logout</button>
+        </div>
+      ) : (
+        <div>
+          <Login />
+          <GoogleOAuth />
+        </div>
+      )}
     </div>
   );
-}
+};
 
 export default App;
